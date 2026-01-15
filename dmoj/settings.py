@@ -121,6 +121,8 @@ VNOJ_LONG_QUEUE_ALERT_THRESHOLD = 10
 
 CELERY_TIMEZONE = 'UTC'
 
+VNOJ_MAGAZINE_TAG_SLUG = None
+
 # Some problems have a lot of testcases, and each testcase
 # has about 5~6 fields, so we need to raise this
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 3000
