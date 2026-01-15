@@ -301,7 +301,7 @@ INLINE_JQUERY = True
 INLINE_FONTAWESOME = True
 JQUERY_JS = '/static/vnoj/jquery/3.4.1/jquery.min.js'
 FONTAWESOME_CSS = '/static/vnoj/font-awesome/4.3.0/css/font-awesome.min.css'
-DMOJ_CANONICAL = 'oj.vnoi.info'
+DMOJ_CANONICAL = 'capyjudge.io.vn'
 
 # Application definition
 
