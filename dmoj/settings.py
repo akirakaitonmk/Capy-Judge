@@ -304,111 +304,9 @@ FONTAWESOME_CSS = '/static/vnoj/font-awesome/4.3.0/css/font-awesome.min.css'
 DMOJ_CANONICAL = 'capyjudge.io.vn'
 
 # Application definition
-
-INSTALLED_APPS = ()
-
-try:
-    import wpadmin
-except ImportError:
-    pass
-else:
-    del wpadmin
-    INSTALLED_APPS += ('wpadmin',)
-
-    WPADMIN = {
-        'admin': {
-            'title': 'Capy Judge Admin',
-            'menu': {
-                'top': 'wpadmin.menu.menus.BasicTopMenu',
-                'left': 'wpadmin.menu.custom.CustomModelLeftMenuWithDashboard',
-            },
-            'custom_menu': [
-                {
-                    'model': 'judge.Problem',
-                    'icon': 'fa-question-circle',
-                    'children': [
-                        'judge.ProblemGroup',
-                        'judge.ProblemType',
-                        'judge.License',
-                    ],
-                },
-                {
-                    'model': 'judge.TagProblem',
-                    'icon': 'fa-tag',
-                    'children': [
-                        'judge.TagGroup',
-                        'judge.Tag',
-                    ],
-                },
-                ('judge.Submission', 'fa-check-square-o'),
-                {
-                    'model': 'judge.Language',
-                    'icon': 'fa-file-code-o',
-                    'children': [
-                        'judge.Judge',
-                    ],
-                },
-                {
-                    'model': 'judge.Contest',
-                    'icon': 'fa-bar-chart',
-                    'children': [
-                        'judge.ContestParticipation',
-                        'judge.ContestTag',
-                    ],
-                },
-                ('judge.Ticket', 'fa-bell'),
-                {
-                    'model': 'auth.User',
-                    'icon': 'fa-user',
-                    'children': [
-                        'judge.Profile',
-                        'judge.Badge',
-                        'auth.Group',
-                        'registration.RegistrationProfile',
-                    ],
-                },
-                {
-                    'model': 'judge.Organization',
-                    'icon': 'fa-users',
-                    'children': [
-                        'judge.OrganizationRequest',
-                    ],
-                },
-                {
-                    'model': 'judge.NavigationBar',
-                    'icon': 'fa-bars',
-                    'children': [
-                        'sites.Site',
-                        'redirects.Redirect',
-                    ],
-                },
-                {
-                    'model': 'judge.BlogPost',
-                    'icon': 'fa-rss-square',
-                    'children': [
-                        'judge.BlogPostTag',
-                    ],
-                },
-                {
-                    'model': 'judge.Comment',
-                    'icon': 'fa-comment-o',
-                    'children': [
-                        'judge.CommentLock',
-                    ],
-                },
-                ('flatpages.FlatPage', 'fa-file-text-o'),
-                ('judge.MiscConfig', 'fa-question-circle'),
-            ],
-            'dashboard': {
-                'breadcrumbs': True,
-            },
-        },
-    }
-
-INSTALLED_APPS += (
+INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
-    'judge',
-    'urlshortener',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.flatpages',
@@ -418,21 +316,23 @@ INSTALLED_APPS += (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'registration',
-    'mptt',
     'reversion',
-    'django_social_share',
-    'social_django',
-    'compressor',
-    'django_ace',
+    'mptt',
     'sortedm2m',
     'statici18n',
-    'impersonate',
+    'compressor',
     'django_jinja',
+    'judge',
+    'urlshortener',
+    'registration',
+    'django_social_share',
+    'social_django',
+    'django_ace',
+    'impersonate',
     'martor',
     'adminsortable2',
     'django_cleanup.apps.CleanupConfig',
-)
+]
 
 MIDDLEWARE = (
     'judge.middleware.ShortCircuitMiddleware',
@@ -455,6 +355,17 @@ MIDDLEWARE = (
     'judge.social_auth.SocialAuthExceptionMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 )
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Capy Judge Admin",
+    "site_header": "Capy Judge",
+    "site_logo": "icons/logo.png", 
+    "site_brand": "Capy Judge",
+    "welcome_sign": "Chào mừng đến với hệ thống quản trị Capy Judge",
+    "copyright": "Capy Judge",
+    "search_model": ["auth.User", "judge.Problem"],
+    "show_ui_builder": True,
+}
 
 IMPERSONATE_REQUIRE_SUPERUSER = True
 IMPERSONATE_DISABLE_LOGGING = True
