@@ -84,8 +84,22 @@
 <script type="text/javascript" src="{{ urljoin(url, static('mathjax_config.js')) }}"></script>
 <script type="text/javascript" src="{{ urljoin(url, static('vnoj/mathjax/3.2.0/es5/tex-chtml.min.js')) }}"></script>
 <script type="text/javascript">
-    MathJax.typesetPromise().then(function () {
-        document.body.classList.add('math-loaded');
+    function handleMathJax() {
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            MathJax.typesetPromise().then(function () {
+                $('.tex-image').hide();
+                $('.tex-text').show();
+            });
+        } else if (window.MathJax && window.MathJax.Hub) {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            MathJax.Hub.Queue(function () {
+                $('.tex-image').hide();
+                $('.tex-text').show();
+            });
+        }
+    }
+    $(document).ready(function() {
+        handleMathJax();
     });
 </script>
 </body>
