@@ -81,25 +81,22 @@
 <div class="content-description printing">
     {{ description|markdown(problem.markdown_style, 'tex')|reference|absolutify(url)|str|safe }}
 </div>
-<script type="text/javascript" src="{{ urljoin(url, static('mathjax_config.js')) }}"></script>
-<script type="text/javascript" src="{{ urljoin(url, static('vnoj/mathjax/3.2.0/es5/tex-chtml.min.js')) }}"></script>
+<script src="/static/vnoj/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/mathjax_config.js"></script>
+<script type="text/javascript" src="/static/vnoj/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
+
 <script type="text/javascript">
-    function handleMathJax() {
+    window.addEventListener('load', function() {
         if (window.MathJax && window.MathJax.typesetPromise) {
             MathJax.typesetPromise().then(function () {
-                $('.tex-image').hide();
-                $('.tex-text').show();
+                document.body.classList.add('math-loaded');
+            }).catch(function (err) {
+                console.log('MathJax typeset failed: ' + err.message);
             });
         } else if (window.MathJax && window.MathJax.Hub) {
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-            MathJax.Hub.Queue(function () {
-                $('.tex-image').hide();
-                $('.tex-text').show();
-            });
+            document.body.classList.add('math-loaded');
         }
-    }
-    $(document).ready(function() {
-        handleMathJax();
     });
 </script>
 </body>
