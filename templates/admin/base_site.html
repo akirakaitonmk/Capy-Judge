@@ -1,15 +1,33 @@
 {% extends "admin/base_site.html" %}
+{% load static %}
 
-{% block pretitle %}{{ block.super }}
+{% block extrahead %}
+    {{ block.super }}
+    {# Sửa cú pháp static ở đây #}
+    <script src="{% static 'wpadmin/js/lib/jquery.min.js' %}"></script>
+    <script>
+        window.django = window.django || {};
+        window.django.jQuery = window.django.jQuery || window.jQuery;
+    </script>
+{% endblock %}
+
+{% block pretitle %}
+    {{ block.super }}
     <form style="display: none" id="empty-action-form" method="post">
         {% csrf_token %}
     </form>
+    
     <script>
-        django.jQuery(function ($) {
-            $('.action-link').on('click', function () {
-                $('#empty-action-form').attr('action', this.href).trigger('submit');
-                return false;
+        (function($) {
+            $(document).ready(function() {
+                $('.action-link').on('click', function (e) {
+                    e.preventDefault();
+                    var href = $(this).attr('href');
+                    if (href) {
+                        $('#empty-action-form').attr('action', href).submit();
+                    }
+                });
             });
-        });
+        })(window.django.jQuery || window.jQuery);
     </script>
 {% endblock %}
