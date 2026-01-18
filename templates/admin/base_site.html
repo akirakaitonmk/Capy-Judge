@@ -3,6 +3,8 @@
 
 {% block extrahead %}
     {{ block.super }}
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    
     <script src="{% static 'wpadmin/js/lib/jquery.min.js' %}"></script>
     <script>
         window.django = window.django || {};
