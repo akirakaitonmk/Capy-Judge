@@ -8,7 +8,6 @@ django-social-share
 django-sortedm2m>=3.1.0
 django-impersonate
 django-redis
-django-jazzmin
 websocket-client
 mysqlclient
 dmoj-wpadmin @ git+https://github.com/DMOJ/dmoj-wpadmin.git
@@ -48,3 +47,5 @@ websocket-client
 # This is a celery dependency whose latest major version is breaking everything.
 importlib-metadata<5
 uwsgi
+watchdog
+matplotlib
