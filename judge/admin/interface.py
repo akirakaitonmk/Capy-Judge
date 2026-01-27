@@ -88,7 +88,7 @@ class BlogPostAdmin(VersionAdmin):
     list_display_links = ('id', 'title')
     ordering = ('-publish_on',)
     form = BlogPostForm
-    date_hierarchy = 'publish_on'
+    #date_hierarchy = 'publish_on'
 
     def has_change_permission(self, request, obj=None):
         if obj is None:
